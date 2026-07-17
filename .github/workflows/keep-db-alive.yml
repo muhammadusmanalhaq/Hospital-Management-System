@@ -1,0 +1,25 @@
+name: Keep Aiven DB Alive
+
+# Runs on a schedule so the free-tier Aiven MySQL service never sits idle
+# long enough to trigger the automatic power-off.
+# You can also trigger it manually from the Actions tab (workflow_dispatch).
+
+on:
+  schedule:
+    - cron: '0 6 * * *'   # every day at 06:00 UTC — adjust if you want less frequent
+  workflow_dispatch:
+
+jobs:
+  ping-db:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install MySQL client
+        run: sudo apt-get update && sudo apt-get install -y mysql-client
+
+      - name: Ping database
+        env:
+          MYSQL_PWD: ${{ secrets.DB_PASSWORD }}
+        run: |
+          mysql -h "${{ secrets.DB_HOST }}" -P "${{ secrets.DB_PORT }}" \
+                -u "${{ secrets.DB_USER }}" --ssl-mode=REQUIRED \
+                -e "SELECT 1;"
