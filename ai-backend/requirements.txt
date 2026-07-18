@@ -8,3 +8,5 @@ google-genai
 pytest
 httpx
 python-multipart
+sqlalchemy
+pymysql
