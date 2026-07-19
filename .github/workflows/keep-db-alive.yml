@@ -6,7 +6,7 @@ name: Keep Aiven DB Alive
 
 on:
   schedule:
-    - cron: '0 6 * * *'   # every day at 06:00 UTC — adjust if you want less frequent
+    - cron: '0 */6 * * *'   # Runs every 6 hours (00:00, 06:00, 12:00, 18:00 UTC)
   workflow_dispatch:
 
 jobs:
