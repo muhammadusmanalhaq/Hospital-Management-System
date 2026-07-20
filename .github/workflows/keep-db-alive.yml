@@ -35,15 +35,20 @@ jobs:
         env:
           MYSQL_PWD: ${{ secrets.DB_PASSWORD }}
         run: |
-          for i in 1 2 3 4 5; do
+          # Up to 20 attempts, 45s apart = ~15 min of patience.
+          # Costs nothing in the normal case (DB was never asleep) since
+          # it succeeds on attempt 1 in under a second — this only matters
+          # for the rare case where it's actually mid-restore from a full
+          # power-off, which can take several minutes.
+          for i in $(seq 1 20); do
             if mysql -h "${{ secrets.DB_HOST }}" -P "${{ secrets.DB_PORT }}" \
                      -u "${{ secrets.DB_USER }}" --ssl-mode=REQUIRED \
                      --connect-timeout=10 -e "SELECT 1;"; then
               echo "DB reachable on attempt $i."
               exit 0
             fi
-            echo "Attempt $i failed, retrying in 30s..."
-            sleep 30
+            echo "Attempt $i failed, retrying in 45s..."
+            sleep 45
           done
-          echo "DB still unreachable after 5 attempts — likely mid full restore, check manually."
+          echo "DB still unreachable after 20 attempts (~15 min) — check manually, this shouldn't happen under normal use."
           exit 1
