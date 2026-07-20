@@ -1,25 +1,49 @@
 name: Keep Aiven DB Alive
 
-# Runs on a schedule so the free-tier Aiven MySQL service never sits idle
-# long enough to trigger the automatic power-off.
-# You can also trigger it manually from the Actions tab (workflow_dispatch).
+# A passive ping can only PREVENT sleep, not undo it — once Aiven fully
+# powers off the service, the hostname stops resolving, so a plain SELECT 1
+# can't reach it either. This workflow is self-healing: it force-powers the
+# service back on via the Aiven API every run (harmless no-op if it's
+# already running), THEN pings it with retries in case it's mid-wake-up.
+#
+# Runs hourly, offset from the top of the hour (GitHub documents :00 as a
+# high-load window prone to delays for scheduled workflows).
 
 on:
   schedule:
-    - cron: '0 */6 * * *'   # Runs every 6 hours (00:00, 06:00, 12:00, 18:00 UTC)
+    - cron: '17 * * * *'   # every hour at :17
   workflow_dispatch:
 
 jobs:
-  ping-db:
+  keep-alive:
     runs-on: ubuntu-latest
     steps:
-      - name: Install MySQL client
-        run: sudo apt-get update && sudo apt-get install -y mysql-client
+      - name: Force-power-on the Aiven service
+        env:
+          AIVEN_TOKEN: ${{ secrets.AIVEN_API_TOKEN }}
+        run: |
+          curl -sf -X PUT "https://api.aiven.io/v1/project/hms-0585/service/hms-db" \
+            -H "Authorization: aivenv1 $AIVEN_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d '{"powered": true}' \
+          || echo "Power-on call failed or already running — continuing to ping."
 
-      - name: Ping database
+      - name: Install MySQL client
+        run: sudo apt-get update -qq && sudo apt-get install -y mysql-client
+
+      - name: Ping database (retries in case it's still waking up)
         env:
           MYSQL_PWD: ${{ secrets.DB_PASSWORD }}
         run: |
-          mysql -h "${{ secrets.DB_HOST }}" -P "${{ secrets.DB_PORT }}" \
-                -u "${{ secrets.DB_USER }}" --ssl-mode=REQUIRED \
-                -e "SELECT 1;"
+          for i in 1 2 3 4 5; do
+            if mysql -h "${{ secrets.DB_HOST }}" -P "${{ secrets.DB_PORT }}" \
+                     -u "${{ secrets.DB_USER }}" --ssl-mode=REQUIRED \
+                     --connect-timeout=10 -e "SELECT 1;"; then
+              echo "DB reachable on attempt $i."
+              exit 0
+            fi
+            echo "Attempt $i failed, retrying in 30s..."
+            sleep 30
+          done
+          echo "DB still unreachable after 5 attempts — likely mid full restore, check manually."
+          exit 1
