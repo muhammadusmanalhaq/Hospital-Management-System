@@ -2,7 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-const verifyToken = require('../middleware/authMiddleware');
+const { verifyToken } = require('../middleware/authMiddleware');
 const { getAppointments, getAppointment, addAppointment, editAppointment, removeAppointment } = require('../controllers/appointmentController');
 
 router.get('/', verifyToken, getAppointments);

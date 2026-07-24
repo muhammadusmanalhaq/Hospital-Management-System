@@ -7,7 +7,10 @@ const {
   createDoctorWithUser,
   updateDoctor,
   deleteDoctor,
-  findUserByEmailForDoctor
+  findUserByEmailForDoctor,
+  getScheduleByDoctorId,
+  addScheduleSlot,
+  deleteScheduleSlot
 } = require('../models/doctorModel');
 
 const getDoctors = async (req, res) => {
@@ -79,4 +82,41 @@ const removeDoctor = async (req, res) => {
   }
 };
 
-module.exports = { getDoctors, getDoctor, createDoctor, editDoctor, removeDoctor };
+const getDoctorSchedule = async (req, res) => {
+  try {
+    const schedule = await getScheduleByDoctorId(req.params.id);
+    res.status(200).json(schedule);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
+const createScheduleSlot = async (req, res) => {
+  try {
+    const { dayOfWeek, startTime, endTime } = req.body;
+    const scheduleId = await addScheduleSlot(req.params.id, dayOfWeek, startTime, endTime);
+    res.status(201).json({ message: 'Schedule slot added successfully', scheduleId });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
+const removeScheduleSlot = async (req, res) => {
+  try {
+    await deleteScheduleSlot(req.params.scheduleId);
+    res.status(200).json({ message: 'Schedule slot deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
+module.exports = {
+  getDoctors,
+  getDoctor,
+  createDoctor,
+  editDoctor,
+  removeDoctor,
+  getDoctorSchedule,
+  createScheduleSlot,
+  removeScheduleSlot
+};

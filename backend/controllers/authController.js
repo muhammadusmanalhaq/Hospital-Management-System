@@ -1,6 +1,8 @@
+// controllers/authController.js
+
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { createUser, findUserByEmail, getRoleIdByName } = require('../models/userModel');
+const { createUser, findUserByEmail, getRoleIdByName, updatePassword } = require('../models/userModel');
 
 const register = async (req, res) => {
   try {
@@ -55,4 +57,39 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { register, login };
+const forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    const user = await findUserByEmail(email);
+    if (!user) {
+      return res.status(200).json({ message: 'If that email exists, a reset link has been sent' });
+    }
+
+    const resetToken = jwt.sign(
+      { id: user.user_id },
+      process.env.JWT_SECRET,
+      { expiresIn: '15m' }
+    );
+
+    res.status(200).json({ message: 'Reset token generated', resetToken });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
+const resetPassword = async (req, res) => {
+  try {
+    const { resetToken, newPassword } = req.body;
+
+    const decoded = jwt.verify(resetToken, process.env.JWT_SECRET);
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    await updatePassword(decoded.id, hashedPassword);
+
+    res.status(200).json({ message: 'Password reset successful' });
+  } catch (error) {
+    res.status(400).json({ message: 'Invalid or expired reset token' });
+  }
+};
+
+module.exports = { register, login, forgotPassword, resetPassword };

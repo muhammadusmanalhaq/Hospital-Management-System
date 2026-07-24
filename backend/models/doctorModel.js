@@ -78,11 +78,34 @@ const findUserByEmailForDoctor = async (email) => {
   return rows[0];
 };
 
+const getScheduleByDoctorId = async (doctorId) => {
+  const [rows] = await db.query(
+    'SELECT * FROM doctor_schedules WHERE doctor_id = ?',
+    [doctorId]
+  );
+  return rows;
+};
+
+const addScheduleSlot = async (doctorId, dayOfWeek, startTime, endTime) => {
+  const [result] = await db.query(
+    'INSERT INTO doctor_schedules (doctor_id, day_of_week, start_time, end_time) VALUES (?, ?, ?, ?)',
+    [doctorId, dayOfWeek, startTime, endTime]
+  );
+  return result.insertId;
+};
+
+const deleteScheduleSlot = async (scheduleId) => {
+  await db.query('DELETE FROM doctor_schedules WHERE schedule_id = ?', [scheduleId]);
+};
+
 module.exports = {
   getAllDoctors,
   getDoctorById,
   createDoctorWithUser,
   updateDoctor,
   deleteDoctor,
-  findUserByEmailForDoctor
+  findUserByEmailForDoctor,
+  getScheduleByDoctorId,
+  addScheduleSlot,
+  deleteScheduleSlot
 };

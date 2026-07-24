@@ -20,4 +20,13 @@ const verifyToken = (req, res, next) => {
   }
 };
 
-module.exports = verifyToken;
+const allowRoles = (...allowedRoleIds) => {
+  return (req, res, next) => {
+    if (!req.user || !allowedRoleIds.includes(req.user.role_id)) {
+      return res.status(403).json({ message: 'Access denied: insufficient permissions' });
+    }
+    next();
+  };
+};
+
+module.exports = { verifyToken, allowRoles };

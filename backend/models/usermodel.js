@@ -29,3 +29,16 @@ module.exports = {
   findUserByEmail,
   getRoleIdByName
 };
+const updatePassword = async (userId, hashedPassword) => {
+  await db.query(
+    'UPDATE users SET password_hash = ? WHERE user_id = ?',
+    [hashedPassword, userId]
+  );
+};
+
+module.exports = {
+  createUser,
+  findUserByEmail,
+  getRoleIdByName,
+  updatePassword
+};

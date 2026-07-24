@@ -5,7 +5,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const authRoutes = require('./routes/authRoutes');
-const verifyToken = require('./middleware/authMiddleware');
+const { verifyToken } = require('./middleware/authMiddleware');
 const patientRoutes = require('./routes/patientRoutes');
 const doctorRoutes = require('./routes/doctorRoutes');
 const appointmentRoutes = require('./routes/appointmentRoutes');
