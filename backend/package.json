@@ -4,7 +4,7 @@
   "description": "**An AI-Powered Healthcare Assistance Platform**",
   "main": "index.js",
   "scripts": {
-     "dev": "nodemon server.js",
+    "dev": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,6 +26,7 @@
     "express": "^5.2.1",
     "express-validator": "^7.3.2",
     "jsonwebtoken": "^9.0.3",
+    "multer": "^2.2.0",
     "mysql2": "^3.23.0"
   },
   "devDependencies": {
