@@ -74,11 +74,25 @@ const findUserByEmailForPatient = async (email) => {
   return rows[0];
 };
 
+const searchPatients = async (searchTerm) => {
+  const [rows] = await db.query(
+    `SELECT p.patient_id, p.date_of_birth, p.gender, p.blood_group,
+            p.address, p.emergency_contact,
+            u.user_id, u.name, u.email, u.phone
+     FROM patients p
+     JOIN users u ON p.user_id = u.user_id
+     WHERE u.name LIKE ? OR u.email LIKE ?`,
+    [`%${searchTerm}%`, `%${searchTerm}%`]
+  );
+  return rows;
+};
+
 module.exports = {
   getAllPatients,
   getPatientById,
   createPatientWithUser,
   updatePatient,
   deletePatient,
-  findUserByEmailForPatient
+  findUserByEmailForPatient,
+  searchPatients
 };

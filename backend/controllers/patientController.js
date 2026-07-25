@@ -7,7 +7,8 @@ const {
   createPatientWithUser,
   updatePatient,
   deletePatient,
-  findUserByEmailForPatient
+  findUserByEmailForPatient,
+  searchPatients
 } = require('../models/patientModel');
 
 const getPatients = async (req, res) => {
@@ -79,4 +80,17 @@ const removePatient = async (req, res) => {
   }
 };
 
-module.exports = { getPatients, getPatient, createPatient, editPatient, removePatient };
+const searchPatient = async (req, res) => {
+  try {
+    const { query } = req.query;
+    if (!query) {
+      return res.status(400).json({ message: 'Search query is required' });
+    }
+    const results = await searchPatients(query);
+    res.status(200).json(results);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
+module.exports = { getPatients, getPatient, createPatient, editPatient, removePatient, searchPatient };
