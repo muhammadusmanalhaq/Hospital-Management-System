@@ -67,6 +67,30 @@ const getPaymentsByBillId = async (billId) => {
   return rows;
 };
 
+const createInsuranceClaim = async (data) => {
+  const [result] = await db.query(
+    'INSERT INTO insurance_claims (bill_id, patient_id, insurance_provider, policy_number, claim_amount) VALUES (?, ?, ?, ?, ?)',
+    [data.billId, data.patientId, data.insuranceProvider, data.policyNumber, data.claimAmount]
+  );
+  return result.insertId;
+};
+
+const updateClaimStatus = async (claimId, status) => {
+  await db.query('UPDATE insurance_claims SET claim_status = ? WHERE claim_id = ?', [status, claimId]);
+};
+
+const getRevenueSummary = async () => {
+  const [rows] = await db.query(
+    `SELECT
+       COUNT(*) AS total_bills,
+       SUM(total_amount) AS total_billed,
+       SUM(CASE WHEN status = 'paid' THEN total_amount ELSE 0 END) AS total_collected,
+       SUM(CASE WHEN status = 'pending' THEN total_amount ELSE 0 END) AS total_pending
+     FROM medical_bills`
+  );
+  return rows[0];
+};
+
 module.exports = {
   getAllBills,
   getBillById,
@@ -74,5 +98,8 @@ module.exports = {
   createBill,
   updateBillStatus,
   createPayment,
-  getPaymentsByBillId
+  getPaymentsByBillId,
+  createInsuranceClaim,
+  updateClaimStatus,
+  getRevenueSummary
 };

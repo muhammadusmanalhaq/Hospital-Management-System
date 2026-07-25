@@ -7,7 +7,10 @@ const {
   createBill,
   updateBillStatus,
   createPayment,
-  getPaymentsByBillId
+  getPaymentsByBillId,
+  createInsuranceClaim,
+  updateClaimStatus,
+  getRevenueSummary
 } = require('../models/billModel');
 
 const getBills = async (req, res) => {
@@ -99,4 +102,44 @@ const getBillPayments = async (req, res) => {
   }
 };
 
-module.exports = { getBills, getBill, getPatientBills, addBill, changeBillStatus, addPayment, getBillPayments };
+const addInsuranceClaim = async (req, res) => {
+  try {
+    const { billId, patientId, insuranceProvider, policyNumber, claimAmount } = req.body;
+    const claimId = await createInsuranceClaim({ billId, patientId, insuranceProvider, policyNumber, claimAmount });
+    res.status(201).json({ message: 'Insurance claim submitted successfully', claimId });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
+const changeClaimStatus = async (req, res) => {
+  try {
+    const { status } = req.body;
+    await updateClaimStatus(req.params.claimId, status);
+    res.status(200).json({ message: 'Claim status updated successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
+const getRevenueReport = async (req, res) => {
+  try {
+    const summary = await getRevenueSummary();
+    res.status(200).json(summary);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
+module.exports = {
+  getBills,
+  getBill,
+  getPatientBills,
+  addBill,
+  changeBillStatus,
+  addPayment,
+  getBillPayments,
+  addInsuranceClaim,
+  changeClaimStatus,
+  getRevenueReport
+};
