@@ -6,14 +6,14 @@ const { createUser, findUserByEmail, getRoleIdByName, updatePassword } = require
 
 const register = async (req, res) => {
   try {
-    const { name, email, password, role } = req.body;
+    const { name, email, password } = req.body;
 
     const existingUser = await findUserByEmail(email);
     if (existingUser) {
       return res.status(400).json({ message: 'Email already registered' });
     }
 
-    const roleId = await getRoleIdByName(role || 'patient');
+    const roleId = await getRoleIdByName('patient');
     if (!roleId) {
       return res.status(400).json({ message: 'Invalid role' });
     }
@@ -72,7 +72,7 @@ const forgotPassword = async (req, res) => {
       { expiresIn: '15m' }
     );
 
-    res.status(200).json({ message: 'Reset token generated', resetToken });
+   res.status(200).json({ message: 'If that email exists, a reset link has been sent' });
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
