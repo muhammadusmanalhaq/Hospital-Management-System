@@ -62,6 +62,14 @@ const editDoctor = async (req, res) => {
     if (!doctor) {
       return res.status(404).json({ message: 'Doctor not found' });
     }
+
+    const isOwner = doctor.user_id === req.user.id;
+    const isAdmin = req.user.role_id === 1;
+
+    if (!isOwner && !isAdmin) {
+      return res.status(403).json({ message: 'You can only edit your own profile' });
+    }
+
     await updateDoctor(req.params.id, req.body);
     res.status(200).json({ message: 'Doctor updated successfully' });
   } catch (error) {

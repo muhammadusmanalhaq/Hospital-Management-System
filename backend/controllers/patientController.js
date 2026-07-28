@@ -60,6 +60,14 @@ const editPatient = async (req, res) => {
     if (!patient) {
       return res.status(404).json({ message: 'Patient not found' });
     }
+
+    const isOwner = patient.user_id === req.user.id;
+    const isAdmin = req.user.role_id === 1;
+
+    if (!isOwner && !isAdmin) {
+      return res.status(403).json({ message: 'You can only edit your own profile' });
+    }
+
     await updatePatient(req.params.id, req.body);
     res.status(200).json({ message: 'Patient updated successfully' });
   } catch (error) {

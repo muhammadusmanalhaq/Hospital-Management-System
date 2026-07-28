@@ -8,7 +8,7 @@ const { getPatients, getPatient, createPatient, editPatient, removePatient, sear
 router.get('/', verifyToken, allowRoles(1, 2), getPatients);
 router.get('/search', verifyToken, allowRoles(1, 2), searchPatient);
 router.get('/:id', verifyToken, getPatient);
-router.post('/', createPatient);
+router.post('/', verifyToken, allowRoles(1, 2), createPatient);
 router.put('/:id', verifyToken, editPatient);
 router.delete('/:id', verifyToken, allowRoles(1), removePatient);
 
