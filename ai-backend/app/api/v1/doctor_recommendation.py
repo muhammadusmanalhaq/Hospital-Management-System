@@ -9,16 +9,17 @@ router = APIRouter()
 def doctor_recommendation(request: DoctorRecommendationRequest):
     try:
         result = recommend_doctor(request.symptoms)
+    except RuntimeError as e:
+        # Order necessary: RuntimeError  catch first (provider failure)
+        raise HTTPException(status_code=502, detail="Both LLM providers are currently unavailable")
     except ValueError as e:
-        raise HTTPException(status_code=502, detail=str(e))
+        # Model provided malformed JSON  — internal parsing issue, not provider issue
+        raise HTTPException(status_code=500, detail="Model returned an invalid response")
     except Exception:
         raise HTTPException(status_code=500, detail="Internal error")
 
     return {
         "success": True,
         "data": result["data"],
-        "meta": {
-            "model_used": result["model"],
-            "provider": result["provider"],
-        },
+        "meta": {"model_used": result["model"], "provider": result["provider"]},
     }
