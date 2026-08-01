@@ -14,16 +14,15 @@ def chatbot(request: ChatbotRequest):
             patient_id=request.patient_id,
             conversation_history=request.conversation_history,
         )
+    except RuntimeError as e:
+        raise HTTPException(status_code=502, detail="Both LLM providers are currently unavailable")
     except ValueError as e:
-        raise HTTPException(status_code=502, detail=str(e))
+        raise HTTPException(status_code=500, detail="Model returned an invalid response")
     except Exception:
         raise HTTPException(status_code=500, detail="Internal error")
 
     return {
         "success": True,
         "data": result["data"],
-        "meta": {
-            "model_used": result["model"],
-            "provider": result["provider"],
-        },
+        "meta": {"model_used": result["model"], "provider": result["provider"]},
     }
