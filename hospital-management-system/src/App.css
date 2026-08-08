@@ -1,0 +1,89 @@
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f4f6f9;
+}
+
+.app-body {
+  display: flex;
+  flex: 1;
+  margin-top: 56px;
+}
+
+.main-content {
+  flex: 1;
+  padding: 24px;
+  overflow-x: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background-color: #1e2129;
+  min-height: calc(100vh - 56px);
+  padding-top: 16px;
+  position: sticky;
+  top: 56px;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  color: #b8bdc7;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+.sidebar-link:hover {
+  background-color: #2a2e38;
+  color: #fff;
+}
+
+.sidebar-link.active {
+  background-color: #2a2e38;
+  color: #fff;
+  border-left: 3px solid #4e73df;
+}
+
+/* Navbar */
+.app-navbar {
+  height: 56px;
+  z-index: 1030;
+}
+
+.notif-badge {
+  position: absolute;
+  top: -2px;
+  right: -6px;
+  font-size: 0.6rem;
+}
+
+/* Stat cards */
+.stat-card {
+  border-radius: 12px;
+}
+
+.stat-icon {
+  width: 55px;
+  height: 55px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.stat-title {
+  font-size: 0.85rem;
+  color: #6c757d;
+}
