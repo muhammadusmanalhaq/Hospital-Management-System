@@ -10,31 +10,34 @@ const patientRoutes = require('./routes/patientRoutes');
 const doctorRoutes = require('./routes/doctorRoutes');
 const appointmentRoutes = require('./routes/appointmentRoutes');
 const prescriptionRoutes = require('./routes/prescriptionRoutes');
-
+const reportRoutes = require('./routes/reportRoutes');
+const billRoutes = require('./routes/billRoutes');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({ origin: '*' }));
 app.use(express.json());
-app.use('/api/patients', patientRoutes);
-app.use('/api/doctors', doctorRoutes);
-app.use('/api/appointments', appointmentRoutes);
+app.use(express.urlencoded({ extended: true }));
 
+// Auth
 app.use('/api/auth', authRoutes);
-app.use('/api/prescriptions', prescriptionRoutes);
+
+// Protected route test
 app.get('/api/protected-test', verifyToken, (req, res) => {
   res.json({ message: 'You accessed a protected route!', user: req.user });
 });
 
+// Resource routes
+app.use('/api/patients', patientRoutes);
+app.use('/api/doctors', doctorRoutes);
+app.use('/api/appointments', appointmentRoutes);
+app.use('/api/prescriptions', prescriptionRoutes);
+app.use('/api/reports', reportRoutes);
+app.use('/api/bills', billRoutes);
+
 app.get('/', (req, res) => {
   res.send('Hospital Management System API is running');
 });
-const reportRoutes = require('./routes/reportRoutes');
-// ...
-app.use('/api/reports', reportRoutes);
-const billRoutes = require('./routes/billRoutes');
-// ...
-app.use('/api/bills', billRoutes);
 
 const PORT = process.env.PORT || 5000;
 

@@ -1,6 +1,6 @@
 import { Nav } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
-import { MdDashboard, MdPeople, MdEventNote, MdReceiptLong } from 'react-icons/md'
+import { MdDashboard, MdPeople, MdEventNote, MdReceiptLong, MdChatBubble } from 'react-icons/md'
 
 function Sidebar() {
   const links = [
@@ -8,6 +8,7 @@ function Sidebar() {
     { to: '/patients', label: 'Patients', icon: <MdPeople size={20} /> },
     { to: '/appointments', label: 'Appointments', icon: <MdEventNote size={20} /> },
     { to: '/billing', label: 'Billing', icon: <MdReceiptLong size={20} /> },
+    { to: '/ai-chatbot', label: 'AI Assistant', icon: <MdChatBubble size={20} /> },
   ]
 
   return (
@@ -31,4 +32,4 @@ function Sidebar() {
   )
 }
 
-export default Sidebar
+export default Sidebar

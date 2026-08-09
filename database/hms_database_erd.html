@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HMS Database ERD</title>
+    <style>
+    /* 1. Force a pure white background for the webpage */
+    body {
+      background-color: #ffffff !important;
+      margin: 20px;
+      display: flex;
+      justify-content: center;
+      font-family: sans-serif;
+    }
+
+    /* =========================================
+       MERMAID SVG OVERRIDES
+       ========================================= */
+
+    /* 2. Make the Table Header and ALL Rows Solid Black */
+    #erd svg [class*="entityBox"],
+    #erd svg [class*="attributeBox"] {
+      fill: #000000 !important;
+      stroke: #000000 !important;
+    }
+
+    /* 3. Make ALL Text INSIDE the tables Solid White */
+    #erd svg [class*="entityLabel"],
+    #erd svg [class*="attribute-name"],
+    #erd svg [class*="attribute-type"],
+    #erd svg [class*="attribute-key"] {
+      fill: #ffffff !important;
+    }
+
+    /* 4. Make the Relationship Lines and Arrows Solid Black */
+    #erd svg [class*="relationshipLine"] {
+      stroke: #000000 !important;
+      stroke-width: 1.5px !important;
+    }
+    #erd svg marker path {
+      fill: #000000 !important;
+      stroke: #000000 !important;
+    }
+
+    /* 5. Make the Relationship Labels (Text on the lines) Black on White */
+    #erd svg [class*="relationshipLabelBox"] {
+      fill: #ffffff !important; 
+      fill-opacity: 1 !important;
+    }
+    #erd svg [class*="relationshipLabel"] {
+      fill: #000000 !important;
+    }
+    
+    /* Hide the faint divider lines between rows since the boxes are solid black */
+    #erd svg .divider path { 
+      display: none !important; 
+    }
+    </style>
+</head>
+<body>
+
+<div id="erd"></div>
+
+<script type="module">
+import mermaid from 'https://esm.sh/mermaid@11/dist/mermaid.esm.min.mjs';
+
+await document.fonts.ready;
+
+mermaid.initialize({
+  startOnLoad: false,
+  theme: 'base',
+  fontFamily: '"Anthropic Sans", sans-serif',
+  themeVariables: {
+    fontSize: '13px'
+  },
+});
+
+const { svg } = await mermaid.render('erd-svg', `erDiagram
+  ROLES ||--o{ USERS : has
+  USERS ||--o| DOCTORS : extends
+  USERS ||--o| PATIENTS : extends
+  DEPARTMENTS ||--o{ DOCTORS : employs
+  DOCTORS ||--o{ APPOINTMENTS : attends
+  PATIENTS ||--o{ APPOINTMENTS : books
+  APPOINTMENTS ||--o| PRESCRIPTIONS : generates
+  APPOINTMENTS ||--o| MEDICAL_BILLS : generates
+  PATIENTS ||--o{ MEDICAL_REPORTS : owns
+  DOCTORS ||--o{ MEDICAL_REPORTS : uploads
+  MEDICAL_BILLS ||--o{ PAYMENTS : receives
+  MEDICAL_BILLS ||--o| INSURANCE_CLAIMS : covered_by
+  PATIENTS ||--o{ CHAT_HISTORY : sends
+  USERS ||--o{ NOTIFICATIONS : receives
+
+  ROLES {
+    int role_id PK
+    string role_name
+  }
+  USERS {
+    int user_id PK
+    string name
+    string email
+    string password_hash
+    int role_id FK
+    string phone
+    timestamp created_at
+  }
+  DEPARTMENTS {
+    int department_id PK
+    string name
+    string description
+  }
+  DOCTORS {
+    int doctor_id PK
+    int user_id FK
+    int department_id FK
+    string specialization
+    string qualification
+    int experience_years
+    decimal consultation_fee
+  }
+  PATIENTS {
+    int patient_id PK
+    int user_id FK
+    date dob
+    string gender
+    string blood_group
+    string address
+    string emergency_contact
+  }
+  APPOINTMENTS {
+    int appointment_id PK
+    int patient_id FK
+    int doctor_id FK
+    date appointment_date
+    time appointment_time
+    string status
+    string reason
+    timestamp created_at
+  }
+  MEDICAL_REPORTS {
+    int report_id PK
+    int patient_id FK
+    int doctor_id FK
+    string report_type
+    string file_path
+    string ai_summary
+    timestamp upload_date
+  }
+  PRESCRIPTIONS {
+    int prescription_id PK
+    int appointment_id FK
+    string medicines
+    string dosage_instructions
+    string notes
+    timestamp created_at
+  }
+  MEDICAL_BILLS {
+    int bill_id PK
+    int patient_id FK
+    int appointment_id FK
+    decimal consultation_charge
+    decimal lab_charge
+    decimal medicine_charge
+    decimal hospital_charge
+    decimal total_amount
+    string status
+    timestamp created_at
+  }
+  PAYMENTS {
+    int payment_id PK
+    int bill_id FK
+    decimal amount_paid
+    string payment_method
+    string transaction_id
+    timestamp payment_date
+    string status
+  }
+  INSURANCE_CLAIMS {
+    int claim_id PK
+    int bill_id FK
+    int patient_id FK
+    string insurance_provider
+    string policy_number
+    decimal claim_amount
+    string claim_status
+    timestamp submitted_date
+  }
+  CHAT_HISTORY {
+    int chat_id PK
+    int patient_id FK
+    string sender
+    string message
+    timestamp created_at
+  }
+  NOTIFICATIONS {
+    int notification_id PK
+    int user_id FK
+    string message
+    string type
+    boolean is_read
+    timestamp created_at
+  }
+`);
+document.getElementById('erd').innerHTML = svg;
+</script>
+
+</body>
+</html>
