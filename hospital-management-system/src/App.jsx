@@ -10,11 +10,10 @@ import AIChatbot from './pages/AIChatbot'
 import { useAuth } from './context/AuthContext'
 import './App.css'
 
-const ProtectedRoute = ({ children }) => {
+const ProtectedRoute = ({ children, allowedRoles }) => {
   const { user } = useAuth();
-  if (!user) {
-    return <Navigate to="/login" />;
-  }
+  if (!user) return <Navigate to="/login" />;
+  if (allowedRoles && !allowedRoles.includes(user.role_id)) return <Navigate to="/" />;
   return children;
 };
 
@@ -30,10 +29,10 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-            <Route path="/patients" element={<ProtectedRoute><Patients /></ProtectedRoute>} />
-            <Route path="/appointments" element={<ProtectedRoute><Appointment /></ProtectedRoute>} />
-            <Route path="/billing" element={<ProtectedRoute><Billing /></ProtectedRoute>} />
-            <Route path="/ai-chatbot" element={<ProtectedRoute><AIChatbot /></ProtectedRoute>} />
+            <Route path="/patients" element={<ProtectedRoute allowedRoles={[1, 2]}><Patients /></ProtectedRoute>} />
+            <Route path="/appointments" element={<ProtectedRoute allowedRoles={[1, 2, 3]}><Appointment /></ProtectedRoute>} />
+            <Route path="/billing" element={<ProtectedRoute allowedRoles={[1]}><Billing /></ProtectedRoute>} />
+            <Route path="/ai-chatbot" element={<ProtectedRoute allowedRoles={[1, 2, 3]}><AIChatbot /></ProtectedRoute>} />
           </Routes>
         </main>
       </div>
