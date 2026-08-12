@@ -1,4 +1,4 @@
-name: CI/CD — Test, Build, Deploy
+name: CI/CD — Test
 
 on:
   push:
@@ -77,13 +77,11 @@ jobs:
           DB_NAME: ${{ secrets.DB_NAME }}
 
   # ─────────────────────────────────────────────────────────────────────────
-  # JOB 3: Build & Deploy Frontend to Vercel
+  # JOB 3: Test Frontend UI (Playwright E2E)
   # ─────────────────────────────────────────────────────────────────────────
-  deploy-frontend:
-    name: Build & Deploy Frontend to Vercel
-    needs: [test-backend, test-ai-backend]
+  test-frontend-ui:
+    name: Test Frontend UI (Playwright E2E)
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     defaults:
       run:
         working-directory: ./hospital-management-system
@@ -101,36 +99,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build
-        run: npm run build
-        env:
-          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
-          VITE_AI_API_BASE_URL: ${{ secrets.VITE_AI_API_BASE_URL }}
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
 
-      - name: Deploy to Vercel
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          working-directory: ./hospital-management-system
-          vercel-args: '--prod'
-
-  # ─────────────────────────────────────────────────────────────────────────
-  # JOB 4: Trigger Render Backend Redeploy
-  # ─────────────────────────────────────────────────────────────────────────
-  deploy-backends:
-    name: Trigger Render Redeploy
-    needs: [test-backend, test-ai-backend]
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    steps:
-      - name: Deploy Node backend to Render
-        run: |
-          curl -s -X POST "${{ secrets.RENDER_NODE_DEPLOY_HOOK }}" \
-            -H "Content-Type: application/json" | echo "Node backend deploy triggered"
-
-      - name: Deploy AI backend to Render
-        run: |
-          curl -s -X POST "${{ secrets.RENDER_AI_DEPLOY_HOOK }}" \
-            -H "Content-Type: application/json" | echo "AI backend deploy triggered"
+      - name: Run Playwright tests
+        run: npm run test:e2e
