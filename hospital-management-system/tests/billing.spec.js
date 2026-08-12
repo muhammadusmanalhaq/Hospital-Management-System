@@ -5,13 +5,12 @@ test.describe('Billing Flow', () => {
     page.on('console', msg => console.log('BROWSER LOG:', msg.text()));
     page.on('requestfailed', request => console.log('FAILED REQ:', request.url(), request.failure().errorText));
 
-    // Mock Auth
+    // Mock Auth login
     await page.route('**/api/auth/login', async route => {
-      await route.fulfill({ json: { token: 'fake-jwt', user: { id: 1, role: 'admin' } } });
-    });
-    // Mock Auth Check
-    await page.route('**/api/protected-test', async route => {
-      await route.fulfill({ json: { message: 'Success', user: { id: 1, role: 'admin', name: 'Admin User' } } });
+      await route.fulfill({ json: { 
+        token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBobXMudGVzdCIsInJvbGVfaWQiOjEsImV4cCI6OTk5OTk5OTk5OX0.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c', 
+        user: { id: 1, name: 'Admin', email: 'admin@hms.test', role_id: 1 } 
+      }});
     });
     // Mock Bills
     await page.route('**/api/bills', async route => {
