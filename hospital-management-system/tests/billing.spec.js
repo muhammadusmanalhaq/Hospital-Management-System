@@ -62,7 +62,7 @@ test.describe('Billing Flow', () => {
     await page.click('button:has-text("Generate Invoice")');
 
     // Verify modal opens
-    await expect(page.locator('h2:has-text("Generate Invoice")')).toBeVisible();
-    await expect(page.locator('label:has-text("Patient")')).toBeVisible();
+    await expect(page.locator('.modal-title:has-text("Generate Invoice")')).toBeVisible();
+    await expect(page.locator('label:has-text("Patient ID")')).toBeVisible();
   });
 });
