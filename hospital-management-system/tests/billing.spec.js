@@ -2,9 +2,16 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Billing Flow', () => {
   test.beforeEach(async ({ page }) => {
+    page.on('console', msg => console.log('BROWSER LOG:', msg.text()));
+    page.on('requestfailed', request => console.log('FAILED REQ:', request.url(), request.failure().errorText));
+
     // Mock Auth
     await page.route('**/api/auth/login', async route => {
       await route.fulfill({ json: { token: 'fake-jwt', user: { id: 1, role: 'admin' } } });
+    });
+    // Mock Auth Check
+    await page.route('**/api/protected-test', async route => {
+      await route.fulfill({ json: { message: 'Success', user: { id: 1, role: 'admin', name: 'Admin User' } } });
     });
     // Mock Bills
     await page.route('**/api/bills', async route => {
