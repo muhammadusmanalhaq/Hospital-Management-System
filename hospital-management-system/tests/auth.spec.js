@@ -11,6 +11,11 @@ test.describe('Authentication Flow', () => {
       await route.fulfill({ json });
     });
 
+    // Mock Auth Check (used by AuthContext)
+    await page.route('**/api/protected-test', async route => {
+      await route.fulfill({ json: { message: 'Success', user: { id: 1, role: 'admin', name: 'Admin User' } } });
+    });
+
     // Go to login page
     await page.goto('/login');
 
