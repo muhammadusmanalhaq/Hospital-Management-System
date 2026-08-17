@@ -1,0 +1,327 @@
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f2f2f2;
+}
+
+.login-container{
+    width:350px;
+    margin:100px auto;
+    background:#fff;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,.2);
+}
+
+h1,h2{
+    text-align:center;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    box-sizing:border-box;
+}
+
+button{
+    width:100%;
+    padding:10px;
+    background:#0d6efd;
+    color:#fff;
+    border:none;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0b5ed7;
+}
+
+p{
+    text-align:center;
+}
+.login-container{
+    width:380px;
+    margin:60px auto;
+    background:#ffffff;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 0 15px rgba(0,0,0,0.2);
+}
+
+.login-container h1{
+    text-align:center;
+    color:#0d6efd;
+    margin-bottom:10px;
+}
+
+.login-container h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.login-container input{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border:1px solid #ccc;
+    border-radius:6px;
+}
+
+.login-container button{
+    width:100%;
+    padding:12px;
+    background:#0d6efd;
+    color:white;
+    border:none;
+    border-radius:6px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.login-container button:hover{
+    background:#0b5ed7;
+}
+
+.login-container p{
+    text-align:center;
+    margin-top:15px;
+}
+.container{
+    width:80%;
+    margin:30px auto;
+}
+
+header{
+    background:#0d6efd;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+footer{
+    margin-top:40px;
+    background:#222;
+    color:white;
+    text-align:center;
+    padding:15px;
+}
+
+ul{
+    margin-left:20px;
+}
+form{
+    width:100%;
+}
+
+form input,
+form textarea{
+
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:6px;
+
+}
+
+form button{
+
+    background:#0d6efd;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:6px;
+    cursor:pointer;
+
+}
+
+form button:hover{
+
+    background:#0b5ed7;
+
+}
+.error-container{
+    width:100%;
+    text-align:center;
+    margin-top:120px;
+}
+
+.error-container h1{
+    font-size:120px;
+    color:#0d6efd;
+}
+
+.error-container h2{
+    font-size:36px;
+    margin-bottom:20px;
+}
+
+.error-container p{
+    font-size:18px;
+    color:#555;
+    margin-bottom:30px;
+}
+
+.btn-home{
+    background:#0d6efd;
+    color:#fff;
+    padding:12px 25px;
+    text-decoration:none;
+    border-radius:6px;
+}
+
+.btn-home:hover{
+    background:#0b5ed7;
+}
+/* Navbar */
+
+.navbar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:#0d6efd;
+
+    padding:15px 40px;
+
+}
+
+.logo h2{
+
+    color:white;
+
+}
+
+.nav-links{
+
+    list-style:none;
+
+    display:flex;
+
+    gap:20px;
+
+}
+
+.nav-links li{
+
+    display:inline;
+
+}
+
+.nav-links a{
+
+    color:white;
+
+    text-decoration:none;
+
+    font-size:16px;
+
+    transition:.3s;
+
+}
+
+.nav-links a:hover{
+
+    color:yellow;
+
+}
+/* Sidebar */
+
+.sidebar{
+
+    width:250px;
+
+    height:100vh;
+
+    background:#0d6efd;
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+    padding-top:20px;
+
+}
+
+.sidebar h2{
+
+    color:white;
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+}
+
+.sidebar ul{
+
+    list-style:none;
+
+    padding:0;
+
+}
+
+.sidebar ul li{
+
+    padding:15px 20px;
+
+}
+
+.sidebar ul li a{
+
+    color:white;
+
+    text-decoration:none;
+
+    display:block;
+
+}
+
+.sidebar ul li:hover{
+
+    background:#0b5ed7;
+
+}
+
+.main-content{
+
+    margin-left:260px;
+
+    padding:30px;
+
+}
+.container{
+    width:90%;
+    margin:auto;
+    padding:20px;
+}
+
+.doctor-card{
+    width:250px;
+    display:inline-block;
+    margin:15px;
+    padding:20px;
+    background:#fff;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,.2);
+    text-align:center;
+}
+
+.doctor-card button{
+    background:#0d6efd;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.doctor-card button:hover{
+    background:#0b5ed7;
+}
