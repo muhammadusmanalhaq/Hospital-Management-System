@@ -1,63 +1,547 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-    <title>Book Appointment</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="css/style.css">
+    <title>CareInFlow.co | Appointment</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f8fb;
+            color: #222;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            background: #087f8c;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* PAGE */
+
+        .page {
+            min-height: calc(100vh - 70px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 20px;
+        }
+
+        .appointment-card {
+            width: 100%;
+            max-width: 700px;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .appointment-card h1 {
+            text-align: center;
+            color: #087f8c;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #087f8c;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .book-btn {
+            width: 100%;
+            padding: 14px;
+            background: #087f8c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .book-btn:hover {
+            background: #066b76;
+        }
+
+        #message {
+            display: none;
+            margin-top: 20px;
+            padding: 14px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .success {
+            display: block !important;
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            display: block !important;
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .appointment-card {
+                padding: 25px;
+            }
+
+        }
+
+    </style>
 
 </head>
 
+
 <body>
 
-<div class="login-box">
 
-<h1>Book Appointment</h1>
+    <!-- NAVBAR -->
 
-<label>Select Doctor</label>
+    <nav>
 
-<select>
+        <div class="logo">
+            🏥 CareInFlow.co
+        </div>
 
-<option>Dr. Ahmed</option>
+        <div class="nav-links">
 
-<option>Dr. Ali</option>
+            <a href="index.html">
+                Home
+            </a>
 
-<option>Dr. Khan</option>
+            <a href="about.html">
+                About
+            </a>
 
-<option>Dr. Sara</option>
+            <a href="doctor.html">
+                Doctors
+            </a>
 
-</select>
+            <a href="appointment.html">
+                Appointment
+            </a>
 
-<label>Select Date</label>
+            <a href="contact.html">
+                Contact
+            </a>
 
-<input type="date">
+            <a href="login.html">
+                Login
+            </a>
 
-<label>Select Time</label>
+        </div>
 
-<input type="time">
+    </nav>
 
-<label>Department</label>
 
-<select>
+    <!-- APPOINTMENT -->
 
-<option>Cardiology</option>
+    <main class="page">
 
-<option>ENT</option>
+        <div class="appointment-card">
 
-<option>Orthopedic</option>
+            <h1>
+                Book an Appointment
+            </h1>
 
-<option>Neurology</option>
+            <p class="subtitle">
+                Schedule an appointment with our experienced doctors.
+            </p>
 
-</select>
 
-<button>Book Appointment</button>
+            <form id="appointmentForm">
 
-<br><br>
 
-<a href="dashboard.html">← Back to Dashboard</a>
+                <!-- PATIENT NAME -->
 
-</div>
+                <div class="form-group">
+
+                    <label for="patientName">
+                        Patient Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="patientName"
+                        placeholder="Enter patient name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="patientEmail">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="patientEmail"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- DOCTOR -->
+
+                <div class="form-group">
+
+                    <label for="doctor">
+                        Select Doctor
+                    </label>
+
+                    <select id="doctor" required>
+
+                        <option value="">
+                            -- Select Doctor --
+                        </option>
+
+                        <option value="Dr. Ahmed Khan">
+                            Dr. Ahmed Khan - Cardiologist
+                        </option>
+
+                        <option value="Dr. Sara Ali">
+                            Dr. Sara Ali - Neurologist
+                        </option>
+
+                        <option value="Dr. Usman Tariq">
+                            Dr. Usman Tariq - Dentist
+                        </option>
+
+                        <option value="Dr. Fatima Noor">
+                            Dr. Fatima Noor - Pediatrician
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- DATE -->
+
+                <div class="form-group">
+
+                    <label for="appointmentDate">
+                        Appointment Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="appointmentDate"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- TIME -->
+
+                <div class="form-group">
+
+                    <label for="appointmentTime">
+                        Appointment Time
+                    </label>
+
+                    <input
+                        type="time"
+                        id="appointmentTime"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- REASON -->
+
+                <div class="form-group">
+
+                    <label for="reason">
+                        Reason for Appointment
+                    </label>
+
+                    <textarea
+                        id="reason"
+                        rows="4"
+                        placeholder="Enter reason..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <!-- BUTTON -->
+
+                <button
+                    type="submit"
+                    class="book-btn"
+                >
+                    Book Appointment
+                </button>
+
+
+                <!-- MESSAGE -->
+
+                <div id="message"></div>
+
+
+            </form>
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 CareInFlow.co | All Rights Reserved
+        </p>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const form =
+                document.getElementById("appointmentForm");
+
+            const message =
+                document.getElementById("message");
+
+            const dateInput =
+                document.getElementById("appointmentDate");
+
+
+            /* Prevent previous dates */
+
+            const today =
+                new Date().toISOString().split("T")[0];
+
+            dateInput.min = today;
+
+
+            /* FORM SUBMIT */
+
+            form.addEventListener("submit", function (event) {
+
+                event.preventDefault();
+
+
+                const patientName =
+                    document.getElementById("patientName").value.trim();
+
+                const patientEmail =
+                    document.getElementById("patientEmail").value.trim();
+
+                const doctor =
+                    document.getElementById("doctor").value;
+
+                const date =
+                    document.getElementById("appointmentDate").value;
+
+                const time =
+                    document.getElementById("appointmentTime").value;
+
+                const reason =
+                    document.getElementById("reason").value.trim();
+
+
+                /* Validation */
+
+                if (
+                    patientName === "" ||
+                    patientEmail === "" ||
+                    doctor === "" ||
+                    date === "" ||
+                    time === "" ||
+                    reason === ""
+                ) {
+
+                    message.textContent =
+                        "Please fill all fields.";
+
+                    message.className = "error";
+
+                    return;
+
+                }
+
+
+                /* Appointment object */
+
+                const appointment = {
+
+                    id: Date.now(),
+
+                    patientName: patientName,
+
+                    patientEmail: patientEmail,
+
+                    doctor: doctor,
+
+                    date: date,
+
+                    time: time,
+
+                    reason: reason
+
+                };
+
+
+                /* Get old appointments */
+
+                let appointments =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "careInFlowAppointments"
+                        )
+                    ) || [];
+
+
+                /* Add appointment */
+
+                appointments.push(appointment);
+
+
+                /* Save */
+
+                localStorage.setItem(
+                    "careInFlowAppointments",
+                    JSON.stringify(appointments)
+                );
+
+
+                /* SUCCESS */
+
+                message.textContent =
+                    "✅ Appointment booked successfully!";
+
+                message.className = "success";
+
+
+                /* Reset form */
+
+                form.reset();
+
+
+                console.log(
+                    "Appointment saved:",
+                    appointment
+                );
+
+            });
+
+        });
+
+    </script>
+
 
 </body>
 

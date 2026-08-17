@@ -1,44 +1,645 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Settings</title>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Settings | CareInFlow.co</title>
+
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        .settings-container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .settings-header {
+            margin-bottom: 30px;
+        }
+
+        .settings-card {
+            background: white;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .settings-card h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .setting-row:last-child {
+            border-bottom: none;
+        }
+
+        .setting-info h3 {
+            margin: 0 0 5px 0;
+        }
+
+        .setting-info p {
+            margin: 0;
+            color: #666;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 7px;
+            box-sizing: border-box;
+        }
+
+        .toggle {
+            position: relative;
+            width: 50px;
+            height: 26px;
+        }
+
+        .toggle input {
+            display: none;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            inset: 0;
+            background: #ccc;
+            border-radius: 30px;
+            transition: 0.3s;
+        }
+
+        .slider:before {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            left: 3px;
+            top: 3px;
+            background: white;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        .toggle input:checked + .slider {
+            background: #0d6efd;
+        }
+
+        .toggle input:checked + .slider:before {
+            transform: translateX(24px);
+        }
+
+        .save-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 7px;
+            background: #0d6efd;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .save-btn:hover {
+            background: #0b5ed7;
+        }
+
+        .danger-btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 6px;
+            background: #dc3545;
+            color: white;
+            cursor: pointer;
+        }
+
+        .danger-btn:hover {
+            background: #b02a37;
+        }
+
+        #settingsMessage {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .dark-mode {
+            background: #121212 !important;
+            color: #f5f5f5;
+        }
+
+        .dark-mode .settings-card {
+            background: #1e1e1e;
+            color: white;
+        }
+
+        .dark-mode .setting-info p {
+            color: #bbb;
+        }
+
+        .dark-mode .setting-row {
+            border-color: #333;
+        }
+
+        @media(max-width: 600px) {
+
+            .setting-row {
+                gap: 15px;
+            }
+
+            .settings-container {
+                margin: 20px auto;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-<div class="login-box">
 
-<h1>Settings</h1>
+<!-- ================= NAVBAR ================= -->
 
-<label>Change Password</label>
-<input type="password" placeholder="New Password">
+<nav>
 
-<label>Confirm Password</label>
-<input type="password" placeholder="Confirm Password">
+    <div class="logo">
+        CareInFlow.co
+    </div>
 
-<label>Language</label>
 
-<select>
-    <option>English</option>
-    <option>Urdu</option>
-</select>
+    <div class="nav-links">
 
-<label>Notifications</label>
+        <a href="index.html">
+            Home
+        </a>
 
-<select>
-    <option>Enable</option>
-    <option>Disable</option>
-</select>
+        <a href="dashboard.html">
+            Dashboard
+        </a>
 
-<button>Save Settings</button>
+        <a href="profile.html">
+            Profile
+        </a>
 
-<br><br>
+        <a href="myappointments.html">
+            My Appointments
+        </a>
 
-<a href="dashboard.html">← Back to Dashboard</a>
+        <a href="notification.html">
+            Notifications
+        </a>
+
+        <a href="settings.html">
+            Settings
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= SETTINGS ================= -->
+
+<div class="settings-container">
+
+
+    <div class="settings-header">
+
+        <h1>
+            Settings
+        </h1>
+
+        <p>
+            Manage your CareInFlow.co account settings.
+        </p>
+
+    </div>
+
+
+    <!-- ================= ACCOUNT SETTINGS ================= -->
+
+    <div class="settings-card">
+
+        <h2>
+            Account Settings
+        </h2>
+
+
+        <div class="form-group">
+
+            <label for="name">
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                id="name"
+                value="Subhan Faisal">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="email">
+                Email Address
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                value="user@example.com">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="language">
+                Language
+            </label>
+
+            <select id="language">
+
+                <option value="english">
+                    English
+                </option>
+
+                <option value="urdu">
+                    Urdu
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= NOTIFICATION SETTINGS ================= -->
+
+    <div class="settings-card">
+
+        <h2>
+            Notification Settings
+        </h2>
+
+
+        <div class="setting-row">
+
+            <div class="setting-info">
+
+                <h3>
+                    Appointment Notifications
+                </h3>
+
+                <p>
+                    Receive notifications about your appointments.
+                </p>
+
+            </div>
+
+
+            <label class="toggle">
+
+                <input
+                    type="checkbox"
+                    id="appointmentNotification"
+                    checked>
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+
+        <div class="setting-row">
+
+            <div class="setting-info">
+
+                <h3>
+                    Email Notifications
+                </h3>
+
+                <p>
+                    Receive important updates through email.
+                </p>
+
+            </div>
+
+
+            <label class="toggle">
+
+                <input
+                    type="checkbox"
+                    id="emailNotification"
+                    checked>
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+
+        <div class="setting-row">
+
+            <div class="setting-info">
+
+                <h3>
+                    Reminder Notifications
+                </h3>
+
+                <p>
+                    Get reminders before your appointments.
+                </p>
+
+            </div>
+
+
+            <label class="toggle">
+
+                <input
+                    type="checkbox"
+                    id="reminderNotification"
+                    checked>
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= APPEARANCE ================= -->
+
+    <div class="settings-card">
+
+        <h2>
+            Appearance
+        </h2>
+
+
+        <div class="setting-row">
+
+            <div class="setting-info">
+
+                <h3>
+                    Dark Mode
+                </h3>
+
+                <p>
+                    Change the appearance of the website.
+                </p>
+
+            </div>
+
+
+            <label class="toggle">
+
+                <input
+                    type="checkbox"
+                    id="darkMode">
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= PASSWORD ================= -->
+
+    <div class="settings-card">
+
+        <h2>
+            Change Password
+        </h2>
+
+
+        <div class="form-group">
+
+            <label for="currentPassword">
+                Current Password
+            </label>
+
+            <input
+                type="password"
+                id="currentPassword"
+                placeholder="Enter current password">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="newPassword">
+                New Password
+            </label>
+
+            <input
+                type="password"
+                id="newPassword"
+                placeholder="Enter new password">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="confirmPassword">
+                Confirm New Password
+            </label>
+
+            <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm new password">
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= SAVE ================= -->
+
+    <div class="settings-card">
+
+        <button
+            class="save-btn"
+            onclick="saveSettings()">
+
+            Save Settings
+
+        </button>
+
+        <p id="settingsMessage"></p>
+
+    </div>
+
+
+    <!-- ================= DANGER ZONE ================= -->
+
+    <div class="settings-card">
+
+        <h2>
+            Account Actions
+        </h2>
+
+        <p>
+            Logging out will end your current session.
+        </p>
+
+        <button
+            class="danger-btn"
+            onclick="logout()">
+
+            Logout
+
+        </button>
+
+    </div>
+
 
 </div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <h3>
+        CareInFlow.co
+    </h3>
+
+    <p>
+        Your health is our priority.
+    </p>
+
+    <p>
+        © 2026 CareInFlow.co
+    </p>
+
+</footer>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+
+/* ================= DARK MODE ================= */
+
+const darkMode =
+    document.getElementById("darkMode");
+
+
+darkMode.addEventListener("change", function() {
+
+    if (this.checked) {
+
+        document.body.classList.add("dark-mode");
+
+    } else {
+
+        document.body.classList.remove("dark-mode");
+
+    }
+
+});
+
+
+/* ================= SAVE SETTINGS ================= */
+
+function saveSettings() {
+
+    const newPassword =
+        document.getElementById("newPassword").value;
+
+    const confirmPassword =
+        document.getElementById("confirmPassword").value;
+
+    const message =
+        document.getElementById("settingsMessage");
+
+
+    if (newPassword !== "" &&
+        newPassword !== confirmPassword) {
+
+        message.textContent =
+            "New passwords do not match.";
+
+        message.style.color = "red";
+
+        return;
+    }
+
+
+    message.textContent =
+        "Settings saved successfully!";
+
+    message.style.color = "green";
+
+}
+
+
+/* ================= LOGOUT ================= */
+
+function logout() {
+
+    const confirmLogout =
+        confirm("Are you sure you want to logout?");
+
+
+    if (confirmLogout) {
+
+        alert("Logged out successfully!");
+
+        window.location.href =
+            "login.html";
+
+    }
+
+}
+
+</script>
+
 
 </body>
 

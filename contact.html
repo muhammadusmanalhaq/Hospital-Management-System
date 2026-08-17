@@ -1,53 +1,348 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us</title>
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Contact | CareInFlow.co</title>
 
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        .contact-container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .contact-item {
+            margin: 20px 0;
+        }
+
+        .contact-item h3 {
+            margin-bottom: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 7px;
+            box-sizing: border-box;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        .send-btn {
+            width: 100%;
+            padding: 13px;
+            background: #0d6efd;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .send-btn:hover {
+            background: #0b5ed7;
+        }
+
+        #contactMessage {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        @media(max-width: 700px) {
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
 </head>
+
+
 <body>
 
-<header>
-    <h1>Hospital Management System</h1>
-</header>
 
-<div class="container">
+<nav>
 
-    <h2>Contact Us</h2>
+    <div class="logo">
+        CareInFlow.co
+    </div>
 
-    <form>
+    <div class="nav-links">
 
-        <input type="text" placeholder="Your Name" required>
+        <a href="index.html">
+            Home
+        </a>
 
-        <input type="email" placeholder="Your Email" required>
+        <a href="about.html">
+            About
+        </a>
 
-        <input type="text" placeholder="Subject" required>
+        <a href="doctor.html">
+            Doctors
+        </a>
 
-        <textarea rows="6" placeholder="Write your message here..." required></textarea>
+        <a href="appointment.html">
+            Appointment
+        </a>
 
-        <button type="submit">Send Message</button>
+        <a href="contact.html">
+            Contact
+        </a>
 
-    </form>
+        <a href="login.html">
+            Login
+        </a>
 
-    <hr>
+    </div>
 
-    <h3>Hospital Information</h3>
+</nav>
 
-    <p><strong>Address:</strong> Main Hospital Road, Lahore, Pakistan</p>
 
-    <p><strong>Phone:</strong> +92-300-1234567</p>
+<div class="contact-container">
 
-    <p><strong>Email:</strong> hospital@gmail.com</p>
+    <h1>
+        Contact CareInFlow.co
+    </h1>
+
+    <p>
+        Have a question? Send us a message.
+    </p>
+
+
+    <div class="contact-grid">
+
+
+        <!-- Contact Information -->
+
+        <div class="contact-card">
+
+            <h2>
+                Get In Touch
+            </h2>
+
+            <div class="contact-item">
+
+                <h3>
+                    📍 Address
+                </h3>
+
+                <p>
+                    Karachi, Pakistan
+                </p>
+
+            </div>
+
+
+            <div class="contact-item">
+
+                <h3>
+                    📞 Phone
+                </h3>
+
+                <p>
+                    +92 300 1234567
+                </p>
+
+            </div>
+
+
+            <div class="contact-item">
+
+                <h3>
+                    📧 Email
+                </h3>
+
+                <p>
+                    info@careinflow.co
+                </p>
+
+            </div>
+
+
+            <div class="contact-item">
+
+                <h3>
+                    🕒 Opening Hours
+                </h3>
+
+                <p>
+                    Open 24/7
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Contact Form -->
+
+        <div class="contact-card">
+
+            <h2>
+                Send Us a Message
+            </h2>
+
+            <form id="contactForm">
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Your Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your name"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Your Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="subject">
+                        Subject
+                    </label>
+
+                    <input
+                        type="text"
+                        id="subject"
+                        placeholder="Enter subject"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="message">
+                        Message
+                    </label>
+
+                    <textarea
+                        id="message"
+                        rows="6"
+                        placeholder="Write your message..."
+                        required></textarea>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="send-btn">
+
+                    Send Message
+
+                </button>
+
+                <p id="contactMessage"></p>
+
+            </form>
+
+        </div>
+
+    </div>
 
 </div>
 
+
 <footer>
 
-    <p>© 2026 Hospital Management System</p>
+    <h3>
+        CareInFlow.co
+    </h3>
+
+    <p>
+        Your health is our priority.
+    </p>
+
+    <p>
+        © 2026 CareInFlow.co
+    </p>
 
 </footer>
+
+
+<script>
+
+document
+    .getElementById("contactForm")
+    .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const message =
+            document.getElementById("contactMessage");
+
+        message.textContent =
+            "Message sent successfully!";
+
+        message.style.color = "green";
+
+        this.reset();
+
+    });
+
+</script>
+
 
 </body>
 </html>

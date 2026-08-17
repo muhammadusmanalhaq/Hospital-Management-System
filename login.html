@@ -3,38 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hospital Management System - Login</title>
+
+    <title>Login | CareInFlow.co</title>
 
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
-<div class="login-container">
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">
+            CareInFlow.co
+        </div>
 
-    <h1>Hospital Management System</h1>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="doctor.html">Doctors</a>
+            <a href="contact.html">Contact</a>
+            <a href="signup.html">Sign Up</a>
+        </div>
+    </nav>
 
-    <h2>Login</h2>
 
-    <form>
+    <!-- Login Section -->
+    <section class="login-section">
 
-        <input type="email" placeholder="Enter Email" required>
+        <div class="login-container">
 
-        <input type="password" placeholder="Enter Password" required>
+            <div class="login-header">
+                <div class="login-icon">🏥</div>
 
-        <button type="submit">Login</button>
+                <h1>Welcome Back</h1>
 
-    </form>
+                <p>
+                    Login to your CareInFlow.co account
+                </p>
+            </div>
 
-    <p>
-        <a href="forgotpassword.html">Forgot Password?</a>
-    </p>
 
-    <p>
-        Don't have an account?
-        <a href="signup.html">Sign Up</a>
-    </p>
+            <!-- Login Form -->
+            <form id="loginForm">
 
-</div>
+                <!-- Email -->
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Password -->
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Remember Me -->
+                <div class="login-options">
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            id="remember"
+                        >
+
+                        Remember me
+                    </label>
+
+                    <a href="forgotpassword.html">
+                        Forgot Password?
+                    </a>
+
+                </div>
+
+
+                <!-- Login Button -->
+                <button
+                    type="submit"
+                    class="login-btn"
+                >
+                    Login
+                </button>
+
+
+                <!-- Message -->
+                <p
+                    id="loginMessage"
+                    class="login-message"
+                ></p>
+
+            </form>
+
+
+            <!-- Signup -->
+            <div class="signup-link">
+
+                <p>
+                    Don't have an account?
+                    <a href="signup.html">
+                        Create Account
+                    </a>
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <h3>
+            CareInFlow.co
+        </h3>
+
+        <p>
+            Your health is our priority.
+        </p>
+
+        <p>
+            © 2026 CareInFlow.co
+        </p>
+
+    </footer>
+
+
+    <!-- Login Script -->
+    <script>
+
+        document
+            .getElementById("loginForm")
+            .addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+                const email =
+                    document.getElementById("email").value.trim();
+
+                const password =
+                    document.getElementById("password").value.trim();
+
+                const message =
+                    document.getElementById("loginMessage");
+
+
+                if (email === "" || password === "") {
+
+                    message.textContent =
+                        "Please enter email and password.";
+
+                    message.style.color = "red";
+
+                    return;
+                }
+
+
+                /*
+                 * Temporary frontend login
+                 *
+                 * Later we can connect this
+                 * with your backend API.
+                 */
+
+                message.textContent =
+                    "Login successful!";
+
+                message.style.color = "green";
+
+
+                setTimeout(function() {
+
+                    window.location.href =
+                        "dashboard.html";
+
+                }, 800);
+
+            });
+
+    </script>
 
 </body>
 </html>

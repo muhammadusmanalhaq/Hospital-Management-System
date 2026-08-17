@@ -1,42 +1,504 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - Hospital Management System</title>
+
+    <title>Sign Up | CareInFlow.co</title>
 
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f8fc;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 7%;
+            background: #0d6efd;
+        }
+
+        .logo {
+            color: white;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .signup-section {
+            min-height: 78vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 20px;
+        }
+
+        .signup-container {
+            width: 100%;
+            max-width: 480px;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .signup-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .signup-icon {
+            font-size: 50px;
+        }
+
+        .signup-header h1 {
+            margin: 10px 0;
+            color: #123;
+        }
+
+        .signup-header p {
+            color: #777;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .signup-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #0d6efd;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .signup-btn:hover {
+            background: #0b5ed7;
+        }
+
+        .signup-message {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .login-link a {
+            color: #0d6efd;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            background: #111827;
+            color: white;
+            padding: 25px;
+        }
+
+        @media (max-width: 700px) {
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .signup-container {
+                padding: 25px;
+            }
+        }
+    </style>
+
 </head>
+
 <body>
 
-<div class="login-container">
+    <!-- NAVBAR -->
 
-    <h1>Hospital Management System</h1>
+    <nav>
 
-    <h2>Create Account</h2>
+        <div class="logo">
+            🏥 CareInFlow.co
+        </div>
 
-    <form>
+        <div class="nav-links">
 
-        <input type="text" placeholder="Full Name" required>
+            <a href="index.html">
+                Home
+            </a>
 
-        <input type="email" placeholder="Email Address" required>
+            <a href="about.html">
+                About
+            </a>
 
-        <input type="tel" placeholder="Phone Number" required>
+            <a href="doctor.html">
+                Doctors
+            </a>
 
-        <input type="password" placeholder="Password" required>
+            <a href="contact.html">
+                Contact
+            </a>
 
-        <input type="password" placeholder="Confirm Password" required>
+            <a href="login.html">
+                Login
+            </a>
 
-        <button type="submit">Create Account</button>
+        </div>
 
-    </form>
+    </nav>
 
-    <p>
-        Already have an account?
-        <a href="login.html">Login</a>
-    </p>
 
-</div>
+    <!-- SIGNUP -->
+
+    <section class="signup-section">
+
+        <div class="signup-container">
+
+            <div class="signup-header">
+
+                <div class="signup-icon">
+                    🏥
+                </div>
+
+                <h1>
+                    Create Account
+                </h1>
+
+                <p>
+                    Join CareInFlow.co
+                </p>
+
+            </div>
+
+
+            <form id="signupForm">
+
+                <!-- FULL NAME -->
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your full name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PHONE -->
+
+                <div class="form-group">
+
+                    <label for="phone">
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        placeholder="+92 300 1234567"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- ROLE -->
+
+                <div class="form-group">
+
+                    <label for="role">
+                        Account Type
+                    </label>
+
+                    <select id="role" required>
+
+                        <option value="">
+                            Select account type
+                        </option>
+
+                        <option value="patient">
+                            Patient
+                        </option>
+
+                        <option value="doctor">
+                            Doctor
+                        </option>
+
+                        <option value="receptionist">
+                            Receptionist
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Create password"
+                        minlength="6"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- CONFIRM PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="confirmPassword">
+                        Confirm Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Confirm password"
+                        minlength="6"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- BUTTON -->
+
+                <button
+                    type="submit"
+                    class="signup-btn"
+                >
+                    Create Account
+                </button>
+
+
+                <p
+                    id="signupMessage"
+                    class="signup-message"
+                ></p>
+
+            </form>
+
+
+            <!-- LOGIN -->
+
+            <div class="login-link">
+
+                <p>
+
+                    Already have an account?
+
+                    <a href="login.html">
+                        Login
+                    </a>
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <h3>
+            CareInFlow.co
+        </h3>
+
+        <p>
+            Your health is our priority.
+        </p>
+
+        <p>
+            © 2026 CareInFlow.co
+        </p>
+
+    </footer>
+
+
+    <!-- SIGNUP JAVASCRIPT -->
+
+    <script>
+
+        const signupForm =
+            document.getElementById("signupForm");
+
+        signupForm.addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+
+                const name =
+                    document.getElementById("name").value.trim();
+
+                const email =
+                    document.getElementById("email").value.trim();
+
+                const phone =
+                    document.getElementById("phone").value.trim();
+
+                const role =
+                    document.getElementById("role").value;
+
+                const password =
+                    document.getElementById("password").value;
+
+                const confirmPassword =
+                    document.getElementById("confirmPassword").value;
+
+                const message =
+                    document.getElementById("signupMessage");
+
+
+                if (
+                    name === "" ||
+                    email === "" ||
+                    phone === "" ||
+                    role === "" ||
+                    password === "" ||
+                    confirmPassword === ""
+                ) {
+
+                    message.textContent =
+                        "Please fill all fields.";
+
+                    message.style.color =
+                        "red";
+
+                    return;
+                }
+
+
+                if (password !== confirmPassword) {
+
+                    message.textContent =
+                        "Passwords do not match.";
+
+                    message.style.color =
+                        "red";
+
+                    return;
+                }
+
+
+                if (password.length < 6) {
+
+                    message.textContent =
+                        "Password must be at least 6 characters.";
+
+                    message.style.color =
+                        "red";
+
+                    return;
+                }
+
+
+                message.textContent =
+                    "Account created successfully!";
+
+                message.style.color =
+                    "green";
+
+
+                setTimeout(function() {
+
+                    window.location.href =
+                        "login.html";
+
+                }, 1200);
+
+            }
+        );
+
+    </script>
 
 </body>
+
 </html>

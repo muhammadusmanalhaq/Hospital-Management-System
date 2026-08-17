@@ -1,46 +1,624 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doctors</title>
+
+    <title>Doctors | CareInFlow.co</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        body {
+            background-color: #f5f8fc;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar-brand {
+            font-size: 24px;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #0d6efd, #084298);
+            color: white;
+            padding: 70px 20px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 45px;
+            font-weight: 700;
+        }
+
+        .page-header p {
+            font-size: 18px;
+            margin-top: 15px;
+        }
+
+        .doctor-section {
+            padding: 70px 0;
+        }
+
+        .doctor-card {
+            background: white;
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: 0.3s ease;
+            height: 100%;
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .doctor-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+
+        .doctor-card .card-body {
+            padding: 25px;
+        }
+
+        .doctor-name {
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 8px;
+        }
+
+        .speciality {
+            color: #0d6efd;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .doctor-info {
+            color: #6c757d;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .doctor-info i {
+            color: #0d6efd;
+            margin-right: 7px;
+        }
+
+        .rating {
+            color: #ffc107;
+            margin-bottom: 15px;
+        }
+
+        .btn-appointment {
+            width: 100%;
+            border-radius: 8px;
+            padding: 10px;
+            font-weight: 600;
+        }
+
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto 50px;
+        }
+
+        .search-box input {
+            height: 50px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            padding-left: 20px;
+        }
+
+        footer {
+            background: #212529;
+            color: white;
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+
+        footer h4 {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            color: #ced4da;
+            margin-bottom: 5px;
+        }
+
+        .footer-links a {
+            color: #ced4da;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 34px;
+            }
+
+            .doctor-image {
+                height: 250px;
+            }
+        }
+    </style>
+
 </head>
+
 <body>
 
-<nav class="navbar">
-    <h2>Hospital Management System</h2>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+
+    <div class="container">
+
+        <a class="navbar-brand fw-bold" href="index.html">
+            🏥 CareInFlow.co
+        </a>
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">
+                        <i class="bi bi-house"></i> Home
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">
+                        <i class="bi bi-info-circle"></i> About
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="doctor.html">
+                        <i class="bi bi-person-badge"></i> Doctors
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="appointment.html">
+                        <i class="bi bi-calendar-check"></i> Appointment
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">
+                        <i class="bi bi-envelope"></i> Contact
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="btn btn-light ms-lg-3" href="login.html">
+                        Login
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
 </nav>
 
-<div class="container">
 
-<h1>Our Doctors</h1>
+<!-- ================= PAGE HEADER ================= -->
 
-<div class="doctor-card">
-    <h3>Dr. Ahmed</h3>
-    <p>Cardiologist</p>
-    <button>View Profile</button>
-</div>
+<section class="page-header">
 
-<div class="doctor-card">
-    <h3>Dr. Sara</h3>
-    <p>Dermatologist</p>
-    <button>View Profile</button>
-</div>
+    <div class="container">
 
-<div class="doctor-card">
-    <h3>Dr. Ali</h3>
-    <p>Neurologist</p>
-    <button>View Profile</button>
-</div>
+        <h1>Our Expert Doctors</h1>
 
-<div class="doctor-card">
-    <h3>Dr. Fatima</h3>
-    <p>Pediatrician</p>
-    <button>View Profile</button>
-</div>
+        <p>
+            Meet our qualified and experienced medical professionals
+        </p>
 
-</div>
+    </div>
+
+</section>
+
+
+<!-- ================= DOCTORS SECTION ================= -->
+
+<section class="doctor-section">
+
+    <div class="container">
+
+        <!-- Search -->
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="doctorSearch"
+                class="form-control"
+                placeholder="🔍 Search doctor or speciality..."
+                onkeyup="searchDoctors()">
+
+        </div>
+
+
+        <div class="row g-4" id="doctorList">
+
+
+            <!-- ================= DOCTOR 1 ================= -->
+
+            <div class="col-lg-3 col-md-6 doctor-item">
+
+                <div class="doctor-card">
+
+                    <img
+                        src="images/doctor1.jpg"
+                        class="doctor-image"
+                        alt="Dr. Ahmed Khan">
+
+                    <div class="card-body">
+
+                        <h4 class="doctor-name">
+                            Dr. Ahmed Khan
+                        </h4>
+
+                        <div class="speciality">
+                            Cardiologist
+                        </div>
+
+                        <div class="rating">
+                            ★★★★★
+                            <span class="text-muted">
+                                4.9
+                            </span>
+                        </div>
+
+                        <p class="doctor-info">
+                            <i class="bi bi-mortarboard"></i>
+                            MBBS, FCPS
+                        </p>
+
+                        <p class="doctor-info">
+                            <i class="bi bi-clock"></i>
+                            10+ Years Experience
+                        </p>
+
+                        <p class="doctor-info">
+                            <i class="bi bi-hospital"></i>
+                            Cardiology Department
+                        </p>
+
+                        <a
+                            href="appointment.html"
+                            class="btn btn-primary btn-appointment">
+
+                            Book Appointment
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= DOCTOR 2 ================= -->
+
+            <div class="col-lg-3 col-md-6 doctor-item">
+
+                <div class="doctor-card">
+
+                    <img
+                        src="images/doctor2.jpg"
+                        class="doctor-image"
+                        alt="Dr. Sara Ali">
+
+                    <div class="card-body">
+
+                        <h4 class="doctor-name">
+                            Dr. Sara Ali
+                        </h4>
+
+                        <div class="speciality">
+                            Neurologist
+                        </div>
+
+                        <div class="rating">
+                            ★★★★★
+                            <span class="text-muted">
+                                4.8
+                            </span>
+                        </div>
+
+                        <p class="doctor-info">
+                            <i class="bi bi-mortarboard"></i>
+                            MBBS, FCPS
+                        </p>
+
+                        <p class="doctor-info">
+                            <i class="bi bi-clock"></i>
+                            8+ Years Experience
+                        </p>
+
+                        <p class="doctor-info">
+                            <i class="bi bi-hospital"></i>
+                            Neurology Department
+                        </p>
+
+                        <a
+                            href="appointment.html"
+                            class="btn btn-primary btn-appointment">
+
+                            Book Appointment
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= DOCTOR 3 ================= -->
+
+            <div class="col-lg-3 col-md-6 doctor-item">
+
+                <div class="doctor-card">
+
+                    <img
+                        src="images/doctor3.jpg"
+                        class="doctor-image"
+                        alt="Dr. Usman Tariq">
+
+                    <div class="card-body">
+
+                        <h4 class="doctor-name">
+                            Dr. Usman Tariq
+                        </h4>
+
+                        <div class="speciality">
+                            Dentist
+                        </div>
+
+                        <div class="rating">
+                            ★★★★★
+                            <span class="text-muted">
+                                4.9
+                            </span>
+                        </div>
+
+                        <p class="doctor-info">
+                            <i class="bi bi-mortarboard"></i>
+                            BDS, FCPS
+                        </p>
+
+                        <p class="doctor-info">
+                            <i class="bi bi-clock"></i>
+                            7+ Years Experience
+                        </p>
+
+                        <p class="doctor-info">
+                            <i class="bi bi-hospital"></i>
+                            Dental Department
+                        </p>
+
+                        <a
+                            href="appointment.html"
+                            class="btn btn-primary btn-appointment">
+
+                            Book Appointment
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= DOCTOR 4 ================= -->
+
+            <div class="col-lg-3 col-md-6 doctor-item">
+
+                <div class="doctor-card">
+
+                    <img
+                        src="images/doctor4.jpg"
+                        class="doctor-image"
+                        alt="Dr. Fatima Noor">
+
+                    <div class="card-body">
+
+                        <h4 class="doctor-name">
+                            Dr. Fatima Noor
+                        </h4>
+
+                        <div class="speciality">
+                            Pediatrician
+                        </div>
+
+                        <div class="rating">
+                            ★★★★★
+                            <span class="text-muted">
+                                4.9
+                            </span>
+                        </div>
+
+                        <p class="doctor-info">
+                            <i class="bi bi-mortarboard"></i>
+                            MBBS, FCPS
+                        </p>
+
+                        <p class="doctor-info">
+                            <i class="bi bi-clock"></i>
+                            9+ Years Experience
+                        </p>
+
+                        <p class="doctor-info">
+                            <i class="bi bi-hospital"></i>
+                            Pediatrics Department
+                        </p>
+
+                        <a
+                            href="appointment.html"
+                            class="btn btn-primary btn-appointment">
+
+                            Book Appointment
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CTA ================= -->
+
+<section class="bg-primary text-white text-center py-5">
+
+    <div class="container">
+
+        <h2 class="fw-bold">
+            Need Medical Consultation?
+        </h2>
+
+        <p class="mt-3">
+            Book an appointment with one of our expert doctors today.
+        </p>
+
+        <a
+            href="appointment.html"
+            class="btn btn-light btn-lg mt-2">
+
+            <i class="bi bi-calendar-check"></i>
+            Book Appointment
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="container">
+
+        <h4>
+            🏥 CareInFlow.co
+        </h4>
+
+        <p>
+            Smart healthcare and hospital management system.
+        </p>
+
+        <div class="footer-links mt-3">
+
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="doctor.html">Doctors</a>
+            <a href="appointment.html">Appointment</a>
+            <a href="contact.html">Contact</a>
+            <a href="login.html">Login</a>
+
+        </div>
+
+        <hr class="border-secondary mt-4">
+
+        <p>
+            © 2026 CareInFlow.co | All Rights Reserved
+        </p>
+
+    </div>
+
+</footer>
+
+
+<!-- ================= BOOTSTRAP JS ================= -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<!-- ================= SEARCH SCRIPT ================= -->
+
+<script>
+
+function searchDoctors() {
+
+    let input =
+        document.getElementById("doctorSearch")
+        .value
+        .toLowerCase();
+
+    let doctors =
+        document.querySelectorAll(".doctor-item");
+
+    doctors.forEach(function (doctor) {
+
+        let text =
+            doctor.innerText.toLowerCase();
+
+        if (text.includes(input)) {
+
+            doctor.style.display = "";
+
+        } else {
+
+            doctor.style.display = "none";
+
+        }
+
+    });
+
+}
+
+</script>
+
 
 </body>
 </html>
