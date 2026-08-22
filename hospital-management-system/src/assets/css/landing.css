@@ -344,6 +344,7 @@ img {
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     transition: all 0.3s ease;
+    text-align: center;
 }
 
 .service-card:hover {

@@ -91,7 +91,7 @@ const LandingPage = () => {
       <section className="about-section">
         <div className="container about-container">
           <div className="about-image">
-            <img src="/images/hero.png" alt="CareInFlow Hospital" />
+            <img src="/images/hospital.jpg" alt="CareInFlow Hospital" />
           </div>
           <div className="about-content">
             <span className="section-label">ABOUT CAREINFLOW.CO</span>
