@@ -44,8 +44,7 @@ const LandingPage = () => {
 
           <div className="hero-image">
             <div className="image-card">
-              {/* Fallback to hero.png if doctor.png is missing */}
-              <img src="/src/assets/images/hero.png" alt="CareInFlow Healthcare Doctor" />
+              <img src="/images/hero.png" alt="CareInFlow Healthcare Doctor" />
             </div>
           </div>
         </div>
@@ -92,9 +91,7 @@ const LandingPage = () => {
       <section className="about-section">
         <div className="container about-container">
           <div className="about-image">
-            <div style={{width: '100%', height: '100%', backgroundColor: '#e2f0ed', borderRadius: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#888'}}>
-              [hospital.jpg]
-            </div>
+            <img src="/images/hero.png" alt="CareInFlow Hospital" />
           </div>
           <div className="about-content">
             <span className="section-label">ABOUT CAREINFLOW.CO</span>
