@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
-import { Container, Card, Form, Button, Alert, Spinner } from 'react-bootstrap';
+import { useNavigate, Link } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -17,7 +16,7 @@ function Login() {
     setLoading(true);
     try {
       await login(email, password);
-      navigate('/');
+      navigate('/dashboard');
     } catch (err) {
       setError('Failed to login. Please check your credentials.');
       setLoading(false);
@@ -25,57 +24,154 @@ function Login() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)' }} className="d-flex align-items-center justify-content-center">
-      <Container className="d-flex align-items-center justify-content-center">
-        <div className="w-100" style={{ maxWidth: '420px' }}>
-          <Card className="shadow-lg border-0" style={{ borderRadius: '1rem' }}>
-            <Card.Body className="p-5">
-              <div className="text-center mb-4">
-                <h2 className="fw-bold text-primary">CareInFlow</h2>
-                <p className="text-muted">Welcome back! Please login to your account.</p>
-              </div>
-              {error && <Alert variant="danger" className="text-center rounded-3">{error}</Alert>}
-              <Form onSubmit={handleSubmit}>
-                <Form.Group id="email" className="mb-3">
-                  <Form.Label className="fw-semibold text-secondary">Email Address</Form.Label>
-                  <Form.Control 
-                    type="email" 
-                    required 
-                    value={email} 
-                    onChange={(e) => setEmail(e.target.value)} 
-                    placeholder="Enter your email"
-                    className="p-2"
-                  />
-                </Form.Group>
-                <Form.Group id="password" className="mb-4">
-                  <Form.Label className="fw-semibold text-secondary">Password</Form.Label>
-                  <Form.Control 
-                    type="password" 
-                    required 
-                    value={password} 
-                    onChange={(e) => setPassword(e.target.value)} 
-                    placeholder="Enter your password"
-                    className="p-2"
-                  />
-                </Form.Group>
-                <Button 
-                  className="w-100 py-2 fw-bold shadow-sm" 
-                  type="submit"
-                  disabled={loading}
-                >
-                  {loading ? (
-                    <>
-                      <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" className="me-2" />
-                      Logging in...
-                    </>
-                  ) : 'Log In'}
-                </Button>
-              </Form>
-            </Card.Body>
-          </Card>
+    <main className="login-section" style={{ minHeight: '78vh', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '50px 20px', background: '#f4f8fc' }}>
+      <style>{`
+        .login-container {
+            width: 100%;
+            max-width: 480px;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+        }
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .login-icon {
+            font-size: 50px;
+        }
+        .login-header h1 {
+            margin: 10px 0;
+            color: #123;
+        }
+        .login-header p {
+            color: #777;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 15px;
+        }
+        .login-options a {
+            color: #0d6efd;
+            text-decoration: none;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #0d6efd;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .login-btn:hover {
+            background: #0b5ed7;
+        }
+        .login-btn:disabled {
+            background: #8ab4f8;
+            cursor: not-allowed;
+        }
+        .login-message {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        .signup-link {
+            text-align: center;
+            margin-top: 25px;
+        }
+        .signup-link a {
+            color: #0d6efd;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        @media (max-width: 700px) {
+            .login-container {
+                padding: 25px;
+            }
+        }
+      `}</style>
+      
+      <div className="login-container">
+        <div className="login-header">
+          <div className="login-icon">🏥</div>
+          <h1>Welcome Back</h1>
+          <p>Login to your CareInFlow.co account</p>
         </div>
-      </Container>
-    </div>
+
+        <form id="loginForm" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="login-options">
+            <label>
+              <input type="checkbox" id="remember" style={{ marginRight: '5px', width: 'auto' }} />
+              Remember me
+            </label>
+            <Link to="/forgotpassword">Forgot Password?</Link>
+          </div>
+
+          <button type="submit" className="login-btn" disabled={loading}>
+            {loading ? 'Logging in...' : 'Login'}
+          </button>
+
+          {error && (
+            <p className="login-message" style={{ color: 'red' }}>
+              {error}
+            </p>
+          )}
+        </form>
+
+        <div className="signup-link">
+          <p>
+            Don't have an account? <Link to="/signup">Create Account</Link>
+          </p>
+        </div>
+      </div>
+    </main>
   );
 }
 
