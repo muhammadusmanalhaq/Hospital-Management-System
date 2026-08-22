@@ -7,13 +7,14 @@ import Appointment from './pages/Appointment'
 import Billing from './pages/Billing'
 import Login from './pages/Login'
 import AIChatbot from './pages/AIChatbot'
+import LandingPage from './pages/LandingPage'
 import { useAuth } from './context/AuthContext'
 import './App.css'
 
 const ProtectedRoute = ({ children, allowedRoles }) => {
   const { user } = useAuth();
   if (!user) return <Navigate to="/login" />;
-  if (allowedRoles && !allowedRoles.includes(user.role_id)) return <Navigate to="/" />;
+  if (allowedRoles && !allowedRoles.includes(user.role_id)) return <Navigate to="/dashboard" />;
   return children;
 };
 
@@ -27,8 +28,9 @@ function App() {
         {user && <Sidebar />}
         <main className={user ? "main-content" : "w-100"}>
           <Routes>
+            <Route path="/" element={user ? <Navigate to="/dashboard" /> : <LandingPage />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+            <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
             <Route path="/patients" element={<ProtectedRoute allowedRoles={[1, 2]}><Patients /></ProtectedRoute>} />
             <Route path="/appointments" element={<ProtectedRoute allowedRoles={[1, 2, 3]}><Appointment /></ProtectedRoute>} />
             <Route path="/billing" element={<ProtectedRoute allowedRoles={[1]}><Billing /></ProtectedRoute>} />
@@ -40,4 +42,4 @@ function App() {
   )
 }
 
-export default App
+export default App
