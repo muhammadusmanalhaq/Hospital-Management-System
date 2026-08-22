@@ -50,10 +50,15 @@
   border-left: 3px solid #4e73df;
 }
 
-/* Navbar */
+/* Navbar — MUST be fixed, override landing.css .navbar sticky rule */
 .app-navbar {
   height: 56px;
-  z-index: 1030;
+  z-index: 1031;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #212529 !important;
 }
 
 .notif-badge {
@@ -86,4 +91,17 @@
 .stat-title {
   font-size: 0.85rem;
   color: #6c757d;
+}
+
+/* Mobile responsive for dashboard */
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+  .main-content {
+    padding: 16px;
+  }
+  .app-body {
+    margin-top: 56px;
+  }
 }

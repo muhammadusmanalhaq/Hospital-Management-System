@@ -75,22 +75,22 @@ function Login() {
             color: #0d6efd;
             text-decoration: none;
         }
-        .login-btn {
+        .login-form-btn {
             width: 100%;
             padding: 14px;
             border: none;
             border-radius: 8px;
-            background: #0d6efd;
+            background: #087f8c;
             color: white;
             font-size: 17px;
             font-weight: bold;
             cursor: pointer;
         }
-        .login-btn:hover {
-            background: #0b5ed7;
+        .login-form-btn:hover {
+            background: #05636d;
         }
-        .login-btn:disabled {
-            background: #8ab4f8;
+        .login-form-btn:disabled {
+            background: #7ecdd4;
             cursor: not-allowed;
         }
         .login-message {
@@ -154,7 +154,7 @@ function Login() {
             <Link to="/forgotpassword">Forgot Password?</Link>
           </div>
 
-          <button type="submit" className="login-btn" disabled={loading}>
+          <button type="submit" className="login-form-btn" disabled={loading}>
             {loading ? 'Logging in...' : 'Login'}
           </button>
 

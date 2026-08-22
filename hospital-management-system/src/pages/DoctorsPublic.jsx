@@ -30,7 +30,7 @@ const doctorsData = [
     qualifications: 'BDS, FCPS',
     experience: '7+ Years Experience',
     department: 'Dental Department',
-    img: '/images/doctor-male.jpg'
+    img: '/images/doctor-usman.jpg'
   },
   {
     id: 4,
@@ -40,7 +40,7 @@ const doctorsData = [
     qualifications: 'MBBS, FCPS',
     experience: '9+ Years Experience',
     department: 'Pediatrics Department',
-    img: '/images/doctor-female.jpg'
+    img: '/images/doctor-fatima.jpg'
   }
 ];
 
@@ -116,8 +116,9 @@ const DoctorsPublic = () => {
         }
         .doctor-card-pro img {
           width: 100%;
-          height: 220px;
+          height: 240px;
           object-fit: cover;
+          object-position: top center;
           display: block;
         }
         .doctor-card-body {
