@@ -156,7 +156,7 @@ img {
             #ffffff 55%,
             #eefafb 100%
         );
-    padding: 90px 0;
+    padding: 55px 0;
     overflow: hidden;
 }
 
@@ -327,7 +327,7 @@ img {
 /* ================= SERVICES ================= */
 
 .services {
-    padding: 100px 0;
+    padding: 60px 0;
     background: var(--white);
 }
 
@@ -386,7 +386,7 @@ img {
 /* ================= ABOUT ================= */
 
 .about-section {
-    padding: 100px 0;
+    padding: 60px 0;
     background: var(--light);
 }
 
@@ -455,7 +455,7 @@ img {
 /* ================= WHY US ================= */
 
 .why-us {
-    padding: 100px 0;
+    padding: 60px 0;
     background: var(--white);
 }
 
@@ -504,7 +504,7 @@ img {
 /* ================= CTA ================= */
 
 .cta {
-    padding: 100px 0;
+    padding: 60px 0;
     background: linear-gradient(
         135deg,
         var(--primary),
