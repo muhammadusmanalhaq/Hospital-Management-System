@@ -22,7 +22,7 @@ test.describe('Authentication Flow', () => {
     await page.click('button[type="submit"]');
 
     // Verify redirect to dashboard — sidebar or navbar should appear
-    await expect(page).toHaveURL('/');
+    await expect(page).toHaveURL('/dashboard');
     await expect(page.locator('text=Hospital Management System')).toBeVisible();
   });
 });
