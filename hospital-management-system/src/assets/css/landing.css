@@ -362,7 +362,7 @@ img {
     background: var(--secondary);
     border-radius: 14px;
     font-size: 28px;
-    margin-bottom: 20px;
+    margin: 0 auto 20px;
 }
 
 .service-card h3 {
