@@ -22,6 +22,7 @@ function Dashboard() {
   const { user } = useAuth()
   const role = user?.role_id // 1=Admin, 2=Doctor, 3=Patient
 
+
   const [stats, setStats] = useState({ patients: 0, appointments: 0, bills: 0, doctors: 0 })
   const [recentPatients, setRecentPatients] = useState([])
   const [myAppointments, setMyAppointments] = useState([])
